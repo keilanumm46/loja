@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtual </title>
+
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Loja Virtual </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar produtos...">
+                <button onclick="searchProducts()">Buscar</button>
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Produtos</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <li><a href="#wishlist" onclick="openWishlist()">Lista de Desejos <span id="wishlist-count">0</span></a></li>
+                <li class="cart"><a href="#" onclick="openCart()">Carrinho <span id="cart-count">0</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero fade-in">
+            <div class="hero-content">
+                <h1>Explore Nossa Coleção Exclusiva</h1>
+                <p>Produtos de alta qualidade com preços imbatíveis!</p>
+                <button onclick="scrollToProducts()">Comprar Agora</button>
+            </div>
+        </section>
+
+        <section class="filter-section">
+            <select id="category-filter" onchange="filterProducts()">
+                <option value="all">Todas Categorias</option>
+                <option value="calçados">Calçados</option>
+                <option value="eletrônicos">Eletrônicos</option>
+                <option value="acessórios">Acessórios</option>
+            </select>
+            <select id="sort-filter" onchange="sortProducts()">
+                <option value="default">Ordenar por</option>
+                <option value="price-asc">Preço: Menor para Maior</option>
+                <option value="price-desc">Preço: Maior para Menor</option>
+                <option value="name">Nome</option>
+            </select>
+        </section>
+
+        <section id="products" class="products">
+            <div class="product-card" data-category="calçados" data-price="199.90">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Tênis Esportivo">
+                <h3>Tênis Esportivo</h3>
+                <p>Conforto e estilo para o dia a dia</p>
+                <p class="price">R$ 199,90</p>
+                <button onclick="addToCart('Tênis Esportivo', 199.90, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff')">Adicionar ao Carrinho</button>
+                <button class="wishlist" onclick="addToWishlist('Tênis Esportivo', 199.90)">Adicionar à Lista de Desejos</button>
+            </div>
+            <div class="product-card" data-category="eletrônicos" data-price="129.90">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e" alt="Fone de Ouvido">
+                <h3>Fone de Ouvido</h3>
+                <p>Qualidade de som superior</p>
+                <p class="price">R$ 129,90</p>
+                <button onclick="addToCart('Fone de Ouvido', 129.90, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e')">Adicionar ao Carrinho</button>
+                <button class="wishlist" onclick="addToWishlist('Fone de Ouvido', 129.90)">Adicionar à Lista de Desejos</button>
+            </div>
+            <div class="product-card" data-category="eletrônicos" data-price="299.90">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30" alt="Relógio Inteligente">
+                <h3>Relógio Inteligente</h3>
+                <p>Tecnologia no seu pulso</p>
+                <p class="price">R$ 299,90</p>
+                <button onclick="addToCart('Relógio Inteligente', 299.90, 'https://images.unsplash.com/photo-1523275335684-37898b6baf30')">Adicionar ao Carrinho</button>
+                <button class="wishlist" onclick="addToWishlist('Relógio Inteligente', 299.90)">Adicionar à Lista de Desejos</button>
+            </div>
+            <div class="product-card" data-category="acessórios" data-price="89.90">
+                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f" alt="Óculos de Sol">
+                <h3>Óculos de Sol</h3>
+                <p>Estilo e proteção UV</p>
+                <p class="price">R$ 89,90</p>
+                <button onclick="addToCart('Óculos de Sol', 89.90, 'https://images.unsplash.com/photo-1572635196237-14b3f281503f')">Adicionar ao Carrinho</button>
+                <button class="wishlist" onclick="addToWishlist('Óculos de Sol', 89.90)">Adicionar à Lista de Desejos</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>Sobre Nós</h3>
+                <p>Somos uma loja virtual dedicada a oferecer produtos de qualidade com a melhor experiência de compra.</p>
+            </div>
+            <div>
+                <h3>Links Úteis</h3>
+                <ul>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contato</h3>
+                <p>Email: contato@lojavirtual.com</p>
+                <p>Telefone: (11) 1234-5678</p>
+            </div>
+        </div>
+        <p style="margin-top: 2rem;">© 2025 Loja Virtual Moderna. Todos os direitos reservados.</p>
+    </footer>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">×</span>
+            <h2>Carrinho de Compras</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">Total: R$ <span id="cart-total">0.00</span></div>
+            <button class="checkout-btn" onclick="checkout()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <div id="wishlist-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeWishlist()">×</span>
+            <h2>Lista de Desejos</h2>
+            <div id="wishlist-items"></div>
+        </div>
+    </div>
+
+   
+
+</body>
+</html>
